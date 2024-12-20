@@ -1,22 +1,29 @@
+# tests/unit/core/test_meta_programming.py
 import pytest
-import pandas as pd
-import numpy as np
-from src.data_processing.pandas_operations import PandasProcessor
+from src.core.meta_programming import singleton, debug_calls, MethodRegistryMetaclass
 
-@pytest.fixture
-def sample_df():
-    return pd.DataFrame({
-        'group': ['A', 'A', 'B', 'B'],
-        'value': [1, 2, 3, 4]
-    })
-
-def test_aggregate_by_group(sample_df):
-    agg_dict = {'value': ['sum', 'mean']}
-    result = PandasProcessor.aggregate_by_group(
-        sample_df,
-        ['group'],
-        agg_dict
-    )
+def test_singleton_decorator():
+    @singleton
+    class TestClass:
+        def __init__(self):
+            
+            self.value = 0
+            
+    instance1 = TestClass()
+    instance2 = TestClass()
+    assert instance1 is instance2
     
-    assert len(result) == 2
-    assert result.loc[result['group'] == 'A', 'value_sum'].iloc[0] == 3
+    instance1.value = 42
+    assert instance2.value == 42
+
+def test_debug_calls(capsys):
+    @debug_calls
+    def test_function(x, y):
+        return x + y
+        
+    result = test_function(2, 3)
+    captured = capsys.readouterr()
+    
+    assert result == 5
+    assert "Calling test_function" in captured.out
+    assert "returned 5" in captured.out
