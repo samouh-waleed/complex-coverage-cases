@@ -64,3 +64,31 @@ class ModuleRegistry:
         if module:
             self.register(module_path, module)
         return module
+    
+
+
+
+# Tested functions are:
+
+# import_module - Directly tested in test_dynamic_module_import()
+# import_from_string - Directly tested in test_import_from_string()
+# lazy_import - Directly tested in test_lazy_import_decorator()
+
+
+# Inner/Child functions and their relationship:
+
+
+# decorator and wrapper are child functions of lazy_import
+
+# Since lazy_import is tested, these should be marked as partially tested (2)
+
+
+
+
+# Untested functions:
+
+
+# conditional_import - No direct or indirect tests
+# register - No direct or indirect tests
+# get - No direct or indirect tests (your output incorrectly marks this as tested)
+# load_module - No direct or indirect tests
