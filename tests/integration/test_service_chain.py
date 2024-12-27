@@ -19,8 +19,8 @@ async def test_service_integration():
         # 3. Cache results
         cache_manager = CacheManager('redis://localhost:6379')
         cache_key = 'test_integration'
-        await cache_manager.set(cache_key, processed_data)
+        cache_manager.set(cache_key, processed_data)
         
         # 4. Verify cached data
-        cached_result = await cache_manager.get(cache_key)
+        cached_result = cache_manager.get(cache_key)
         assert cached_result == processed_data

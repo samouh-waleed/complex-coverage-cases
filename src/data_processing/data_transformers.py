@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.decomposition import PCA
+from typing import Any, Dict, List, Optional, Union, Tuple
+
 
 class DataTransformer:
     """Complex data transformation operations."""

@@ -1,5 +1,5 @@
 import asyncio
-from Reop3.src.services.async_client import AsyncClient
+from src.services.async_client import AsyncClient
 import pytest
 from src.core.meta_programming import singleton
 from src.data_processing.data_transformers import DataTransformer

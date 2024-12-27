@@ -1,5 +1,6 @@
 import requests
 from typing import Dict, List, Optional, Union
+import concurrent.futures
 import pandas as pd
 import json
 from functools import wraps
@@ -31,7 +32,11 @@ class DataFetcher:
         self.session = requests.Session()
         if api_key:
             self.session.headers.update({'Authorization': f'Bearer {api_key}'})
-
+    
+    def process_data(self, data: Dict) -> Dict:
+    # For now, do nothing fancy, just return it
+        return data
+    
     @retry_on_failure(max_retries=3)
     def fetch_json_data(
         self,
